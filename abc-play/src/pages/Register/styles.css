@@ -31,6 +31,15 @@ select {
     border-radius: 40px;
     border: 0;
     height: 40px;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    font-size: 18px;
+    color: #000;
+    background-color: #fff;
+}
+
+select:hover {
+    box-shadow: 0 0 1pt 1pt #62f09b;
 }
 
 form h2 {

@@ -14,12 +14,36 @@ const Register = () => {
     const [type, setType] = useState("estudante")
     const [loading, setLoading] = useState(false)
 
+    const [validName, setValidName] = useState(true)
+    const [validPassword, setValidPassword] = useState(true)
+    const [validConfPassword, setValidConfirmPassword] = useState(true)
+
     const handleRegister = async (e) => {
         e.preventDefault()
         if(name === "" || email === "" || password === "") {
             setLoading(false)
+            
+            if(name === "") {
+                setValidName(false)
+            } else {
+                setValidName(true)
+            }
+
+            if(password === "") {
+                setValidPassword(false)
+            } else {
+                setValidPassword(true)
+            }
+
+            if(confirmPass === "") {
+                setValidConfirmPassword(false)
+            } else {
+                setValidConfirmPassword(true)
+            }
+            
            return alert("Preencha todos os campos para realizar o cadastro")
         } else if (password !== confirmPass) {
+
             return alert ("Reveja as senhas..elas não estão iguais!")
         } else {
             setLoading(true)
@@ -44,12 +68,13 @@ const Register = () => {
     }
 
     return (
+
         <div className="register-content">
             {loading ? <Spinner /> :  
             <form onSubmit={handleRegister}>
                 <h2>Cadastre-se</h2>
                 <input 
-                    className="register-form" 
+                    className={validName ? "register-form" : "register-form error"} 
                     type="text" 
                     placeholder="Usuário"
                     value={name}
@@ -61,13 +86,13 @@ const Register = () => {
                     value={email}
                     onChange={e => setEmail(e.target.value)}/>
                 <input 
-                    className="register-form" 
+                    className={validPassword ? "register-form" : "register-form error"} 
                     type="password" 
                     placeholder="Senha"
                     value={password}
                     onChange={e => setPassword(e.target.value)}/>
                 <input 
-                    className="register-form" 
+                    className={validConfPassword ? "register-form" : "register-form error"} 
                     type="password" 
                     placeholder="Confirme a senha"
                     value={confirmPass}

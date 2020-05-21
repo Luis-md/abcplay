@@ -21,6 +21,6 @@ button {
     cursor: pointer;
 }
 
-input {
-    vertical-align: center;
+.error {
+    border: 2px solid #eb516d;
 }
