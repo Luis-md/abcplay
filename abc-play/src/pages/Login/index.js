@@ -8,21 +8,32 @@ const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
 
-    const handleLogin = (e) => {
+   async function handleLogin (e) {
         e.preventDefault()
-
+        setLoading(true)        
         const data = {
             email,
             password
         }
 
-        console.log(data)
+
+        let user = await axios.post("http://localhost:3333/login", data)
+        if(user.data.user) {
+            setLoading(false)
+            console.log(user.data.user)
+        } else {
+            setLoading(false)
+            console.log(user.data.error)
+        }
+        
     }
 
     return (
         <div className="login-content">
-            <form onSubmit={handleLogin}>
+            {loading ? <Spinner /> : 
+                <form onSubmit={handleLogin}>
                 <h2>Login</h2>
                 <input 
                     className="login-form" 
@@ -42,6 +53,7 @@ const Login = () => {
                     <button type="submit" className="btn-login btn-register">Entrar</button>
                 </div>
             </form>
+            }
         </div>
     )
 }
