@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import './styles.css'
+import Spinner from '../../components/Spinner'
 
 const Register = () => {
 
@@ -11,22 +12,40 @@ const Register = () => {
     const [password, setPassword] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
     const [type, setType] = useState("estudante")
+    const [loading, setLoading] = useState(false)
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault()
-
-        const data = {
-            name, 
-            email,
-            password,
-            type
+        if(name === "" || email === "" || password === "") {
+            setLoading(false)
+           return alert("Preencha todos os campos para realizar o cadastro")
+        } else if (password !== confirmPass) {
+            return alert ("Reveja as senhas..elas não estão iguais!")
+        } else {
+            setLoading(true)
+            const data = {
+                name, 
+                email,
+                password,
+                type
+            }
+            let user = await axios.post("http://localhost:3333/cadastro", data) 
+            if(user.data.user) {
+                console.log(user)
+                setLoading(false)
+            } else if (user.data.error) {
+                setLoading(false)
+                alert(user.data.error.message)
+            }
+            
         }
 
-        console.log(data)
+
     }
 
     return (
         <div className="register-content">
+            {loading ? <Spinner /> :  
             <form onSubmit={handleRegister}>
                 <h2>Cadastre-se</h2>
                 <input 
@@ -70,7 +89,8 @@ const Register = () => {
                 <Link to='/login' className="cta-login">Já possui conta? <span>Entrar</span></Link>
                 <button type="submit" className="btn-form btn-register">Cadastrar</button>
                 </div>
-            </form>
+            </form>}
+           
         </div>
     )
 }

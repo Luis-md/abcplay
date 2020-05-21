@@ -22,10 +22,10 @@ const Login = () => {
         let user = await axios.post("http://localhost:3333/login", data)
         if(user.data.user) {
             setLoading(false)
-            console.log(user.data.user)
+            console.log(user)
         } else {
             setLoading(false)
-            console.log(user.data.error)
+            console.log(user)
         }
         
     }
