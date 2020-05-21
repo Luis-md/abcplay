@@ -1,0 +1,32 @@
+.content {
+    background-image: url('../../assets/img_bg.png');
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.text {
+    padding-top: 50px;
+    padding-left: 150px;
+}
+
+.text h1 {
+    font-size: 50px;
+}
+
+.text p {
+    font-size: 25px;
+}
+
+footer {
+    display: flex;
+    background-color: #1B3785;
+    justify-content: space-around;
+    color: #fff;
+    padding: 20px;
+}
+
+footer ul {
+    list-style: none;
+}
