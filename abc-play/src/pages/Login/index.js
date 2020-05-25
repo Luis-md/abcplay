@@ -1,31 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Spinner from '../../components/Spinner'
-import axios from 'axios'
+import AuthContext from '../../context/auth/authContext'
 
 import './styles.css'
 
-const Login = () => {
+const Login = props => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [loading, setLoading] = useState(false)
 
-   async function handleLogin (e) {
+    const authContext = useContext(AuthContext)
+
+    const { login, error, clearErrors, isAuthenticated, loading } = authContext
+
+    useEffect(() => {
+
+        if(isAuthenticated) {
+            props.history.push('/user')
+        }
+
+        if(error) {
+            console.error(error)
+            clearErrors();
+        }
+
+        // eslint-disable-next-line
+    }, [error, isAuthenticated, props.history])
+
+   const handleLogin = async (e) => {
         e.preventDefault()
-        setLoading(true)        
-        const data = {
-            email,
-            password
-        }
-
-
-        let user = await axios.post("http://localhost:3333/login", data)
-        if(user.data.user) {
-            setLoading(false)
-        } else {
-            setLoading(false)
-        }
-        
+        login({email, password})
     }
 
     return (
