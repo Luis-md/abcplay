@@ -1,11 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import AuthContext from '../../context/auth/authContext'
 
 import './styles.css'
 import Spinner from '../../components/Spinner'
 
-const Register = () => {
+const Register = props => {
+
+    const authContext = useContext(AuthContext)
+    const { register, error, clearErrors, isAuthenticated } = authContext
+
+    useEffect(() => {
+
+        if(isAuthenticated) {
+            props.history.push('/')
+        }
+
+        if(error) {
+            console.error(error)
+            clearErrors();
+        }
+
+        // eslint-disable-next-line
+    }, [error, isAuthenticated, props.history])
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -46,21 +64,12 @@ const Register = () => {
 
             return alert ("Reveja as senhas..elas não estão iguais!")
         } else {
-            setLoading(true)
-            const data = {
-                name, 
+            register({ 
+                name,
                 email,
                 password,
                 type
-            }
-            let user = await axios.post("http://localhost:3333/cadastro", data) 
-            if(user.data.user) {
-                console.log(user)
-                setLoading(false)
-            } else if (user.data.error) {
-                setLoading(false)
-                alert(user.data.error.message)
-            }
+             })
             
         }
 

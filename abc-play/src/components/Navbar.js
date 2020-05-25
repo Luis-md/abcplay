@@ -11,7 +11,7 @@ import './styles.css'
 const Navbar = () => {
     const authContext = useContext(AuthContext)
 
-    const { isAuthenticated, logout } = authContext
+    const { isAuthenticated, logout, user } = authContext
 
     const onLogout = () => {
         logout()
