@@ -11,7 +11,7 @@ import './styles.css'
 const Navbar = () => {
     const authContext = useContext(AuthContext)
 
-    const { isAuthenticated, logout, user } = authContext
+    const { isAuthenticated, logout } = authContext
 
     const onLogout = () => {
         logout()
@@ -33,7 +33,7 @@ const Navbar = () => {
 
     return (
         <div className='nav-container'>
-            <Link to='/'><img src={Logo} alt="ABC-Play logo"/></Link>
+            <Link to={isAuthenticated ? '/user' : '/'}><img src={Logo} alt="ABC-Play logo"/></Link>
             <nav>
                 {isAuthenticated ? authLinks : guestLinks}
             </nav>

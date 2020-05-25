@@ -9,6 +9,7 @@ const User = () => {
 
     useEffect(() => {
         authContext.loadUser();
+        console.log('entrou')
     // eslint-disable-next-line
     }, [])
 

@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext'
 
@@ -9,12 +8,12 @@ import Spinner from '../../components/Spinner'
 const Register = props => {
 
     const authContext = useContext(AuthContext)
-    const { register, error, clearErrors, isAuthenticated } = authContext
+    const { register, error, clearErrors, isAuthenticated, loading } = authContext
 
     useEffect(() => {
 
         if(isAuthenticated) {
-            props.history.push('/')
+            props.history.push('/user')
         }
 
         if(error) {
@@ -30,7 +29,6 @@ const Register = props => {
     const [password, setPassword] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
     const [type, setType] = useState("estudante")
-    const [loading, setLoading] = useState(false)
 
     const [validName, setValidName] = useState(true)
     const [validPassword, setValidPassword] = useState(true)
@@ -39,7 +37,6 @@ const Register = props => {
     const handleRegister = async (e) => {
         e.preventDefault()
         if(name === "" || email === "" || password === "") {
-            setLoading(false)
             
             if(name === "") {
                 setValidName(false)

@@ -34,17 +34,19 @@ const AuthState = props => {
 
     //Load user
     const loadUser = async () => {
+        setLoading()
         if(localStorage.token) {
             setAuthToken(localStorage.token)
         }
         try {
             const res = await axios.get('http://localhost:3333/user')
-            console.log(res)
+            console.log('entrou aqui', res.data)
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
             })
         } catch (err) {
+            console.log('entrou no erro')
             dispatch({
                 type: AUTH_ERROR
             })
@@ -62,7 +64,8 @@ const AuthState = props => {
         }
 
         try {
-            const res = await axios.post('"http://localhost:3333/cadastro', formData, config);
+            const res = await axios.post('http://localhost:3333/cadastro', formData, config);
+            console.log(res.data)
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
