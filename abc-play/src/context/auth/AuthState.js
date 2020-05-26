@@ -40,13 +40,12 @@ const AuthState = props => {
         }
         try {
             const res = await axios.get('http://localhost:3333/user')
-            console.log('entrou aqui', res.data)
+            console.log('veio do state', res.data)
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
             })
         } catch (err) {
-            console.log('entrou no erro')
             dispatch({
                 type: AUTH_ERROR
             })
