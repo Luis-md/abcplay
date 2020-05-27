@@ -1,4 +1,4 @@
-.user-screen {
+.assuntos {
     min-height: 100vh;
     background-color: #829BE1;
     display: flex;
@@ -6,11 +6,8 @@
     justify-content: center;
 }
 
-.user-screen h1 {
-    color: #fff
-}
-
-.welcome-action {
+.assuntos h1 {
+    color: #fff;
     margin-top: 52px;
 }
 
@@ -27,21 +24,5 @@
 }
 
 .btn-play:hover {
-    filter: brightness(90%)
-}
-
-.btn-config {
-    background-color: #999;
-    color: #fff;
-    height: 40px;
-    width: 100%;
-    border-radius: 10px;
-    transition: filter 0.2s;
-    font-size: 18px;
-    border: 0px;
-    margin-top: 20px;
-}
-
-.btn-config:hover {
     filter: brightness(90%)
 }

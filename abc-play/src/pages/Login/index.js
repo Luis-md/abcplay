@@ -19,7 +19,7 @@ const Login = props => {
             props.history.push('/user')
         }
         if(error) {
-            console.error(error)
+            alert(error)
             clearErrors();
         }
         // eslint-disable-next-line

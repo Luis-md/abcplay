@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../context/auth/authContext'
 import './styles.css'
 import Spinner from '../../components/Spinner'
+import { Link } from 'react-router-dom'
 
 const User = () => {
    
@@ -28,6 +29,8 @@ const User = () => {
             {loading ? <Spinner /> : 
             <div className="welcome-action">
                 <h1>Bem vindo, {user && user.username}</h1>
+                <Link to='/assuntos'><button className='btn-play'>Escolher quiz</button></Link>
+                <button className='btn-config'>Configurações</button>
             </div>}
         </div>
     )

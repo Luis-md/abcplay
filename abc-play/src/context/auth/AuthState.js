@@ -40,7 +40,6 @@ const AuthState = props => {
         }
         try {
             const res = await axios.get('http://localhost:3333/user')
-            console.log('veio do state', res.data)
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
@@ -89,12 +88,16 @@ const AuthState = props => {
         }
 
         try {
-            const res = await axios.post("http://localhost:3333/login", formData, config);        
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: res.data
-            })
-            loadUser()
+            const res = await axios.post("http://localhost:3333/login", formData, config);
+                if(!res.data.error) {
+                    dispatch({
+                        type: LOGIN_SUCCESS,
+                        payload: res.data
+                    })
+                    loadUser()
+                } else {
+                    dispatch({type: LOGIN_FAIL, payload: res.data.error})
+                }
         } catch (error) {
             dispatch({
                 type: LOGIN_FAIL,
