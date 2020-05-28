@@ -1,0 +1,116 @@
+.quiz {
+    min-height: 100vh;
+    background-color: #E0DCDC;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.quiz-template {
+    margin-top: 20px;
+    text-align: -webkit-center;
+}
+
+.btn-alt-1 {
+    background-color: #829BE1;
+    color: #fff;
+    height: 40px;
+    width: 50%;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    border: 0px;
+    margin-top: 20px;
+    display: block;
+}
+
+.btn-alt-1:hover {
+    filter: brightness(90%)
+}
+
+.btn-alt-2 {
+    background-color: #439F68;
+    color: #fff;
+    height: 40px;
+    width: 50%;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    border: 0px;
+    margin-top: 20px;
+    display: block;
+}
+
+.btn-alt-2:hover {
+    filter: brightness(90%)
+}
+
+.btn-alt-3 {
+    background-color: #F0D402;
+    color: #fff;
+    height: 40px;
+    width: 50%;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    border: 0px;
+    margin-top: 20px;
+    display: block;
+}
+
+.btn-alt-3:hover {
+    filter: brightness(90%)
+}
+
+.btn-alt-4 {
+    background-color: #E81313;
+    color: #fff;
+    height: 40px;
+    width: 50%;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    border: 0px;
+    margin-top: 20px;
+    display: block;
+}
+
+.btn-alt-4:hover {
+    filter: brightness(90%)
+}
+
+.btn-avancar {
+    background-color: #000;
+    color: #fff;
+    height: 40px;
+    min-width: 250px;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    border: 0px;
+    margin-top: 20px;
+    display: block;
+}
+
+.btn-avancar:hover {
+    filter: brightness(90%)
+}
+
+.cronometro {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cronometro img {
+    height: 30px;
+}
+
+.cronometro h2 {
+    margin-left: 10px;
+}
+
+.alt {
+    border: 3px solid #133878
+}

@@ -10,14 +10,16 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import User from './pages/User'
+import Series from './pages/Serie/Series'
 import Assuntos from './pages/Assuntos/Assuntos'
+import Quiz from './pages/Quiz/Quiz'
 
 /*PRIVATE ROUTE*/
 import PrivateRoute from './components/routing/PrivateRoute'
 
 /*STATES*/
 import AuthState from './context/auth/AuthState'
-import AssuntosState from './context/assuntos/AssuntosState'
+import SeriesState from './context/serie/SeriesState'
 
 if(localStorage.token) {
   setAuthToken(localStorage.token)
@@ -26,7 +28,7 @@ if(localStorage.token) {
 function App() {
   return (
     <AuthState>
-      <AssuntosState>
+      <SeriesState>
         <>
           <Router>
           <Navbar />
@@ -35,11 +37,13 @@ function App() {
             <Route exact path='/cadastro' component={Register} />
             <Route exact path='/login' component={Login} />
             <PrivateRoute exact path="/user" component={ User } />
+            <PrivateRoute exact path='/serie' component={ Series } />
             <PrivateRoute exact path="/assuntos" component={ Assuntos } />
+            <PrivateRoute exact path="/quiz" component={ Quiz } />
           </Switch>
         </Router>
         </>
-      </AssuntosState>
+      </SeriesState>
     </AuthState>
   );
 }

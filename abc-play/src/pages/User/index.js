@@ -29,7 +29,7 @@ const User = () => {
             {loading ? <Spinner /> : 
             <div className="welcome-action">
                 <h1>Bem vindo, {user && user.username}</h1>
-                <Link to='/assuntos'><button className='btn-play'>Escolher quiz</button></Link>
+                <Link to='/serie'><button className='btn-play'>Escolher quiz</button></Link>
                 <button className='btn-config'>Configurações</button>
             </div>}
         </div>

@@ -1,0 +1,28 @@
+.serie {
+    min-height: 100vh;
+    background-color: #829BE1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.serie h1 {
+    color: #fff;
+    margin-top: 52px;
+}
+
+.btn-play {
+    background-color: #067d4d;
+    color: #fff;
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    border: 0px;
+    margin-top: 20px;
+}
+
+.btn-play:hover {
+    filter: brightness(90%)
+}

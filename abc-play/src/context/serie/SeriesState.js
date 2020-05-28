@@ -1,43 +1,47 @@
 import React, { useReducer } from 'react'
 import axios from 'axios'
 import setAuthToken from '../../utils/setAuthToken'
-import AssuntosContext from './assuntosContext'
-import assuntosReducer from './assuntosReducer'
+import SeriesContext from './seriesContext'
+import seriesReducer from './seriesReducer'
 
 import {
     SET_LOADING,
     AUTH_ERROR,
-    GET_ASSUNTOS
+    GET_SERIE,
+    SET_QUIZ,
+    SET_ASSUNTOS
 } from '../types'
 
 
-const AssuntosState = props => {
+const SeriesState = props => {
     const initialState = {
         token: localStorage.getItem('token'),
         isAuthenticated: null,
         user: null,
         loading: false,
         error: null,
-        assuntos: []
+        index: null,
+        series: [],
+        assuntos: [],
+        questoes: [],
     }
 
-    const [ state, dispatch ] = useReducer(assuntosReducer, initialState);
+    const [ state, dispatch ] = useReducer(seriesReducer, initialState);
 
     //Set loading
     const setLoading = () => dispatch({type: SET_LOADING})
 
 
-    //Load assuntos
-    const loadAssuntos = async () => {
+    //Load series
+    const loadSeries = async () => {
         setLoading()
         if(localStorage.token) {
             setAuthToken(localStorage.token)
         }
         try {
-            console.log('chamou')
-            const res = await axios.get('http://localhost:3333/assuntos')
+            const res = await axios.get('http://localhost:3333/serie')
             dispatch({
-                type: GET_ASSUNTOS,
+                type: GET_SERIE,
                 payload: res.data
             })
         } catch (err) {
@@ -47,19 +51,34 @@ const AssuntosState = props => {
         }
     }
 
+    //Set assuntos
+    const setAssuntos = (pos) => {
+        dispatch({type: SET_ASSUNTOS, payload: pos})
+    }
+
+    //set quiz
+
+    const setQuiz = (pos) => {
+        console.log(pos)
+        dispatch({type: SET_QUIZ, payload: pos})
+    }
   
-    return <AssuntosContext.Provider
+    return <SeriesContext.Provider
             value={{
                 token: state.token,
                 isAuthenticated: state.isAuthenticated,
                 loading: state.loading,
                 user: state.user,
                 error: state.error,
+                series: state.series,
                 assuntos: state.assuntos,
-                loadAssuntos,
+                quiz: state.quiz,
+                setAssuntos,
+                loadSeries,
+                setQuiz
             }}>
             {props.children}
-        </AssuntosContext.Provider>
+        </SeriesContext.Provider>
 }
 
-export default AssuntosState;
+export default SeriesState;
