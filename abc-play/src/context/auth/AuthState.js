@@ -8,6 +8,10 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     USER_LOADED,
+    ADD_DESEMPENHO,
+    RESULTADO_TEMPORARIO,
+    CLEAR_RESULTADO,
+    DESEMPENHO_FAIL,
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
@@ -22,6 +26,9 @@ const AuthState = props => {
         token: localStorage.getItem('token'),
         isAuthenticated: null,
         user: null,
+        desempenho: null,
+        acertos: 0,
+        erros: 0,
         loading: false,
         error: null
     }
@@ -63,7 +70,6 @@ const AuthState = props => {
 
         try {
             const res = await axios.post('http://localhost:3333/cadastro', formData, config);
-            console.log(res.data)
             dispatch({
                 type: REGISTER_SUCCESS,
                 payload: res.data
@@ -106,6 +112,47 @@ const AuthState = props => {
         }
     }
 
+    //SET DESEMPENHO
+
+    const addDesempenho = async assunto => {
+        const config = {
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }
+
+        try {
+            const res = await axios.post('http://localhost:3333/desempenho', assunto, config)
+            dispatch({
+                type: ADD_DESEMPENHO, 
+                payload: res.data
+            })
+        } catch (err) {
+            dispatch({
+                type: DESEMPENHO_FAIL,
+                payload: err.response 
+            })
+        }
+    }
+
+    //Set temp result
+
+    const setTempResult = estatistica => {
+
+            dispatch({
+                type: RESULTADO_TEMPORARIO, 
+                payload: estatistica
+            })
+    }
+
+    //CLEAR RESULTADO
+    const clearResult = () => {
+
+        dispatch({
+            type: CLEAR_RESULTADO
+        })
+}
+
     //Logout
 
     const logout = () => {
@@ -127,11 +174,17 @@ const AuthState = props => {
                 loading: state.loading,
                 user: state.user,
                 error: state.error,
+                desempenho: state.desempenho,
+                acertos: state.acertos,
+                erros: state.erros,
                 register,
                 loadUser,
                 login,
                 logout,
-                clearErrors
+                clearErrors,
+                addDesempenho,
+                setTempResult,
+                clearResult
             }}>
             {props.children}
         </AuthContext.Provider>

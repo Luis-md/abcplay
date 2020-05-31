@@ -44,13 +44,14 @@ const Series = () => {
 
     return (
         <div className='serie'>
-            {loading ? <Spinner /> :
-            <div> 
+            {series && !loading ? <div> 
                 <h1>{user && user.username}, agora escolha a Série</h1>
                 {series.map((serie, index )=> (
                     <SeriesItem key={serie.serie} idx={index} serie={serie}/>
                 ))}
-            </div>
+            </div> :
+
+                <Spinner />
             }
         </div>
     )

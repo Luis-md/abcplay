@@ -21,7 +21,8 @@ const SeriesState = props => {
         loading: false,
         error: null,
         index: null,
-        series: [],
+        series: null,
+        titulo: null,
         assuntos: [],
         questoes: [],
     }
@@ -71,6 +72,7 @@ const SeriesState = props => {
                 user: state.user,
                 error: state.error,
                 series: state.series,
+                titulo: state.titulo,
                 assuntos: state.assuntos,
                 quiz: state.quiz,
                 setAssuntos,

@@ -30,7 +30,7 @@ const User = () => {
             <div className="welcome-action">
                 <h1>Bem vindo, {user && user.username}</h1>
                 <Link to='/serie'><button className='btn-play'>Escolher quiz</button></Link>
-                <button className='btn-config'>Configurações</button>
+                <Link to='/desempenho'><button className='btn-config'>Desempenho</button></Link>
             </div>}
         </div>
     )

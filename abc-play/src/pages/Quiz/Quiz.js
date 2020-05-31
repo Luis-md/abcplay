@@ -3,14 +3,15 @@ import './style.css'
 import AuthContext from '../../context/auth/authContext'
 import SeriesContext from '../../context/serie/seriesContext'
 import Relogio from '../../assets/Cronometro.png'
+import { Link } from 'react-router-dom'
 
 const Quiz = props => {
 
     const seriesContext = useContext(SeriesContext)
-    const { assunto, quiz } = seriesContext
+    const { assunto, quiz, titulo } = seriesContext
     
     const authContext = useContext(AuthContext)
-    const { isAuthenticated } = authContext
+    const { isAuthenticated, addDesempenho, setTempResult } = authContext
 
     const [resposta, setResposta] = useState(-1)
     const [atual, setAtual] = useState(0)
@@ -99,7 +100,13 @@ const Quiz = props => {
             setCounter(10)
             resetBtn()
         } else {
-            console.log("acabou")
+            let resultado = {
+                title: titulo,
+                acertos, 
+                erros
+            }
+            addDesempenho(resultado)
+            setTempResult(resultado)
             console.log(`Acertos -> ${acertos}`)
             console.log(`Erros -> ${erros}`)
         }
@@ -107,7 +114,7 @@ const Quiz = props => {
 
     let avancarBtn = ultima ? 
     <div>
-        <button className='btn-avancar' onClick={nextQuestion}>Gerar resultado</button>
+        <Link to='/resultado'><button className='btn-avancar' onClick={nextQuestion}>Gerar resultado</button></Link>
     </div> :
     <div>
         <button className='btn-avancar' onClick={nextQuestion}>Próxima pergunta</button>

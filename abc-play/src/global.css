@@ -25,3 +25,7 @@ button {
 .error {
     border: 2px solid #eb516d;
 }
+
+a {
+    text-decoration: none;
+}

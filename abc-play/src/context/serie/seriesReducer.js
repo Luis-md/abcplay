@@ -19,15 +19,15 @@ export default (state, action) => {
         case SET_ASSUNTOS: {
             return {
                 ...state,
-                assuntos: state.series[action.payload].assuntos
+                assuntos: state.series[action.payload].assuntos,
             }
         }
 
         case SET_QUIZ: {
-            console.log(state.assuntos[action.payload].questoes)
             return {
                 ...state,
-                quiz: state.assuntos[action.payload].questoes
+                quiz: state.assuntos[action.payload].questoes,
+                titulo: state.assuntos[action.payload].title
             }
         }
 

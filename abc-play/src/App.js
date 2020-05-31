@@ -13,6 +13,8 @@ import User from './pages/User'
 import Series from './pages/Serie/Series'
 import Assuntos from './pages/Assuntos/Assuntos'
 import Quiz from './pages/Quiz/Quiz'
+import Result from './pages/Result/Result'
+import Desempenho from './pages/Desempenho/Desempenho'
 
 /*PRIVATE ROUTE*/
 import PrivateRoute from './components/routing/PrivateRoute'
@@ -40,6 +42,8 @@ function App() {
             <PrivateRoute exact path='/serie' component={ Series } />
             <PrivateRoute exact path="/assuntos" component={ Assuntos } />
             <PrivateRoute exact path="/quiz" component={ Quiz } />
+            <PrivateRoute exact path="/resultado" component={ Result } />
+            <PrivateRoute exact path="/desempenho" component={ Desempenho } />
           </Switch>
         </Router>
         </>
