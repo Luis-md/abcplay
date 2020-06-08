@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../context/auth/authContext'
-import './style.css'
+import './styles.css'
 import Spinner from '../../components/Spinner'
-import DesempenhoItem from './DesempenhoItem'
+import BuscarItem from './BuscarItem'
+import ProfessorFilter from './ProfessorFilter'
 import { Link } from 'react-router-dom'
 
-const Desempenho = () => {
+const BuscarProfessor = () => {
    
     const[ loading, setLoading ] = useState(false)    
     const authContext = useContext(AuthContext)
-    let [result, setResult] = useState([])
 
-    const { user, desempenho } = authContext
+    const { user, getProfessores, filtered, professores } = authContext
 
     useEffect(() => {
         authContext.loadUser();
@@ -21,9 +21,7 @@ const Desempenho = () => {
     useEffect(() => {
         if(user) {
             setLoading(false)
-            if(desempenho) {
-                getEstatistica()
-            }
+            getProfessores()
         } else {
             setLoading(true)
         }
@@ -32,34 +30,27 @@ const Desempenho = () => {
 
     useEffect(() => {
         //eslint-disable-next-line
-    }, [desempenho])
+    }, [professores])
 
-    const getEstatistica = () => {
-        let complete = []
-        for (let [key, value] of Object.entries(desempenho)) {
-        let dado = {
-            acertos: value.acertos,
-            erros: value.erros,
-            title: value.title,
-            today: value.today,
-            id: key
-          }  
-          complete.push(dado)
-        }
-        setResult(complete)
-    }
-
-    const dados = desempenho ? (
+    const dados = professores.length > 0 ? (
             <div className="welcome-action">
-                <h1>{user && user.username}, este é o seu desempenho no ABC Play</h1>
-                {result.map(res => (
-                    <DesempenhoItem key = {res.id} dados = {res} />
-                ))}
+                <h1>{user && user.username}, digite nome ou email do seu professor</h1>
+                <ProfessorFilter />
+                {filtered !== null ? filtered.map(prof => (
+                    <BuscarItem key = {prof.email} dados = {prof} /> 
+                )) : 
+                professores.map(res => (
+                    <BuscarItem key = {res.email} dados = {res} />
+                ))
+            }
+                {/* {professores.map(res => (
+                    <BuscarItem key = {res.email} dados = {res} />
+                ))} */}
                 <Link to='/serie'><button className='btn-quiz'>Escolher quiz</button></Link>
             </div>
     ) : (
             <div className="welcome-action">
-                <h1>{user && user.username}, jogue partidas para gerar dados</h1>
+                <h1>O ABC Play não possui professores cadastrados ainda</h1>
                 <Link to='/serie'><button className='btn-quiz'>Escolher quiz</button></Link>
             </div>
     )
@@ -73,4 +64,4 @@ const Desempenho = () => {
     )
 }
 
-export default Desempenho
+export default BuscarProfessor

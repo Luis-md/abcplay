@@ -11,19 +11,24 @@ const Login = props => {
 
     const authContext = useContext(AuthContext)
 
-    const { login, error, clearErrors, isAuthenticated, loading } = authContext
+    const { login, error, clearErrors, isAuthenticated, user, loadUser, loading } = authContext
 
     useEffect(() => {
-        console.log(isAuthenticated)
         if(isAuthenticated) {
-            props.history.push('/user')
+            loadUser()
+            if(user) {
+                user.type === "estudante" ? 
+                props.history.push('/user') :
+                props.history.push('/professor')
+
+            }
         }
         if(error) {
             alert(error)
             clearErrors();
         }
         // eslint-disable-next-line
-    }, [error, isAuthenticated, props.history])
+    }, [error, isAuthenticated, user, props.history])
 
    const handleLogin = async (e) => {
         e.preventDefault()

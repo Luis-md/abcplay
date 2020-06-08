@@ -1,0 +1,87 @@
+.user-screen {
+    min-height: 100vh;
+    background-color: #829BE1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.user-screen h1 {
+    color: #fff
+}
+
+.welcome-action {
+    margin-top: 52px;
+}
+
+.btn-quiz {
+    background-color: #067d4d;
+    color: #fff;
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    border: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-play:hover {
+    filter: brightness(90%)
+}
+
+.prof-card {
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.prof-content {
+    margin: 4px 0px;
+}
+
+.filter-form {
+    padding-top: 12px;
+    width: 100%;
+    min-width: 100px;
+}
+
+
+.filter-form input {
+    width: 100%;
+    display: block;
+    padding: 10px 0 10px 10px;
+    border-radius: 10px;
+    border: 0;
+    transition: box-shadow 0.2s;
+}
+
+.btn-add {
+    background-color: #1B3785;
+    color: #fff;
+    height: 28px;
+    width: 110px;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    margin-right: 20px;
+    border: 0;
+}
+
+.btn-remove {
+    background-color: #ab2727;
+    color: #fff;
+    height: 28px;
+    width: 110px;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    margin-right: 20px;
+    border: 0;
+}
+
+.btn-add:hover {
+    filter: brightness(90%)
+}

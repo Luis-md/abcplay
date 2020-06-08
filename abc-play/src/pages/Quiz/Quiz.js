@@ -11,7 +11,7 @@ const Quiz = props => {
     const { assunto, quiz, titulo } = seriesContext
     
     const authContext = useContext(AuthContext)
-    const { isAuthenticated, addDesempenho, setTempResult } = authContext
+    const { isAuthenticated, addDesempenho, setTempResult, user } = authContext
 
     const [resposta, setResposta] = useState(-1)
     const [atual, setAtual] = useState(0)
@@ -34,10 +34,12 @@ const Quiz = props => {
     }, [])
 
     useEffect(() => {
-        if(isAuthenticated && quiz === []) {
+        if(isAuthenticated && quiz === [] && user.type === "estudante") {
             props.history.push('/user')
         } else if (!isAuthenticated && assunto === []) {
             props.history.push('/login')
+        } else if (isAuthenticated && user.type === "professor") {
+            props.history.push('/professor')
         }
         // eslint-disable-next-line
     }, [isAuthenticated, quiz, props.history])

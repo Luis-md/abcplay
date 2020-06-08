@@ -17,6 +17,10 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     CLEAR_ERRORS,
+    GET_PROFESSORES,
+    FILTER_PROFESSORES,
+    ADD_PROFESSOR,
+    CLEAR_FILTER,
     SET_LOADING
 } from '../types'
 
@@ -27,6 +31,11 @@ const AuthState = props => {
         isAuthenticated: null,
         user: null,
         desempenho: null,
+        professores: [],
+        filtered: null,
+        meusProfessores: null,
+        alunos: null,
+        meusAlunos: null,
         acertos: 0,
         erros: 0,
         loading: false,
@@ -145,6 +154,56 @@ const AuthState = props => {
             })
     }
 
+    //GET PROFESSORES
+
+    const getProfessores = async () => {
+        if(localStorage.token) {
+            setAuthToken(localStorage.token)
+        }
+        try {
+            const res = await axios.get('http://localhost:3333/professores')
+            console.log('from authState - ', res.data)
+            dispatch({
+                type: GET_PROFESSORES,
+                payload: res.data
+            })
+        } catch (err) {
+            dispatch({
+                type: AUTH_ERROR
+            })
+        }
+    }
+
+    const addProfessor = async (dados) => {
+        const config = {
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }
+
+        try {
+            const res = await axios.post('http://localhost:3333/addProfessor', dados, config)
+            dispatch({
+                type: ADD_PROFESSOR, 
+                payload: res.data
+            })
+        } catch (err) {
+            dispatch({
+                type: DESEMPENHO_FAIL,
+                payload: err.response 
+            })
+        }
+    }
+
+    //fitlter professores
+    const filterProfessores = text => {
+        dispatch({type: FILTER_PROFESSORES, payload: text})
+    }
+
+    const clearFilter = () => {
+        dispatch({type: CLEAR_FILTER})
+    }
+
     //CLEAR RESULTADO
     const clearResult = () => {
 
@@ -173,6 +232,11 @@ const AuthState = props => {
                 isAuthenticated: state.isAuthenticated,
                 loading: state.loading,
                 user: state.user,
+                professores: state.professores,
+                filtered: state.filtered,
+                meusProfessores: state.meusProfessores,
+                alunos: state.alunos,
+                meusAlunos: state.meusAlunos,
                 error: state.error,
                 desempenho: state.desempenho,
                 acertos: state.acertos,
@@ -184,7 +248,11 @@ const AuthState = props => {
                 clearErrors,
                 addDesempenho,
                 setTempResult,
-                clearResult
+                clearResult,
+                getProfessores,
+                filterProfessores,
+                addProfessor,
+                clearFilter
             }}>
             {props.children}
         </AuthContext.Provider>

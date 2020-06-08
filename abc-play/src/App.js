@@ -10,6 +10,9 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import User from './pages/User'
+import Professor from './pages/Professor/Professor'
+import Professores from './pages/Professores/Professores'
+import BuscarProfessor from './pages/BuscarProfessor/BuscarProfessor'
 import Series from './pages/Serie/Series'
 import Assuntos from './pages/Assuntos/Assuntos'
 import Quiz from './pages/Quiz/Quiz'
@@ -44,6 +47,9 @@ function App() {
             <PrivateRoute exact path="/quiz" component={ Quiz } />
             <PrivateRoute exact path="/resultado" component={ Result } />
             <PrivateRoute exact path="/desempenho" component={ Desempenho } />
+            <PrivateRoute exact path="/professor" component={ Professor } />
+            <PrivateRoute exact path="/professores" component={ Professores } />
+            <PrivateRoute exact path="/buscar-professor" component={ BuscarProfessor } />
           </Switch>
         </Router>
         </>

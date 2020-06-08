@@ -8,12 +8,18 @@ import Spinner from '../../components/Spinner'
 const Register = props => {
 
     const authContext = useContext(AuthContext)
-    const { register, error, clearErrors, isAuthenticated, loading } = authContext
+    const { register, error, clearErrors, isAuthenticated, loadUser, user, loading } = authContext
 
     useEffect(() => {
 
         if(isAuthenticated) {
-            props.history.push('/user')
+            loadUser()
+            if(user) {
+                user.type === "estudante" ? 
+                props.history.push('/user') :
+                props.history.push('/professor')
+
+            }
         }
 
         if(error) {

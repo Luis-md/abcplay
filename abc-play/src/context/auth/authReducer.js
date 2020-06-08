@@ -11,7 +11,11 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     CLEAR_ERRORS,
-    SET_LOADING
+    SET_LOADING,
+    GET_PROFESSORES,
+    FILTER_PROFESSORES,
+    ADD_PROFESSOR,
+    CLEAR_FILTER
 } from '../types'
 
 export default (state, action) => {
@@ -22,7 +26,8 @@ export default (state, action) => {
                 isAuthenticated: true,
                 loading: false,
                 user: action.payload,
-                desempenho: action.payload.desempenho
+                desempenho: action.payload.desempenho,
+                meusProfessores: action.payload.professores
             }
         case DESEMPENHO_FAIL:
         case AUTH_ERROR:
@@ -53,7 +58,6 @@ export default (state, action) => {
                 loading: false
             }
         case ADD_DESEMPENHO: 
-            console.log('desempenho -', action.payload)
             return {
                 ...state,
                 desempenho: action.payload
@@ -81,6 +85,30 @@ export default (state, action) => {
                 acertos: 0,
                 erros: 0
             }
+        case GET_PROFESSORES: 
+            return {
+                ...state,
+                professores: action.payload
+            }
+        case FILTER_PROFESSORES:
+            return {
+                ...state,
+                filtered: state.professores.filter(professor => {
+                const regex = new RegExp(`${action.payload}`, 'gi')
+                return professor.username.match(regex) || professor.email.match(regex)
+            })
+        }
+
+        case ADD_PROFESSOR:
+            return {
+                ...state,
+                meusProfessores: action.payload
+            }
+        case CLEAR_FILTER: 
+        return {
+            ...state,
+            filtered: null
+        }
         case CLEAR_ERRORS: 
             return {
                 ...state,
