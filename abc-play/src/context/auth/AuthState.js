@@ -20,7 +20,9 @@ import {
     GET_PROFESSORES,
     FILTER_PROFESSORES,
     ADD_PROFESSOR,
+    DEL_PROFESSOR,
     CLEAR_FILTER,
+    GET_ALUNO,
     SET_LOADING
 } from '../types'
 
@@ -35,7 +37,7 @@ const AuthState = props => {
         filtered: null,
         meusProfessores: null,
         alunos: null,
-        meusAlunos: null,
+        meuAluno: null,
         acertos: 0,
         erros: 0,
         loading: false,
@@ -174,6 +176,22 @@ const AuthState = props => {
         }
     }
 
+    const getMeuAluno = (aluno) => {
+        if(localStorage.token) {
+            setAuthToken(localStorage.token)
+        }
+        try {
+            dispatch({
+                type: GET_ALUNO,
+                payload: aluno
+            })
+        } catch (err) {
+            dispatch({
+                type: AUTH_ERROR
+            })
+        }
+    }
+
     const addProfessor = async (dados) => {
         const config = {
             headers: {
@@ -185,6 +203,27 @@ const AuthState = props => {
             const res = await axios.post('http://localhost:3333/addProfessor', dados, config)
             dispatch({
                 type: ADD_PROFESSOR, 
+                payload: res.data
+            })
+        } catch (err) {
+            dispatch({
+                type: DESEMPENHO_FAIL,
+                payload: err.response 
+            })
+        }
+    }
+
+    const delProfessor = async (dados) => {
+        const config = {
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }
+
+        try {
+            const res = await axios.post('http://localhost:3333/delProf', dados, config)
+            dispatch({
+                type: DEL_PROFESSOR, 
                 payload: res.data
             })
         } catch (err) {
@@ -236,7 +275,7 @@ const AuthState = props => {
                 filtered: state.filtered,
                 meusProfessores: state.meusProfessores,
                 alunos: state.alunos,
-                meusAlunos: state.meusAlunos,
+                meuAluno: state.meuAluno,
                 error: state.error,
                 desempenho: state.desempenho,
                 acertos: state.acertos,
@@ -252,6 +291,8 @@ const AuthState = props => {
                 getProfessores,
                 filterProfessores,
                 addProfessor,
+                delProfessor,
+                getMeuAluno,
                 clearFilter
             }}>
             {props.children}

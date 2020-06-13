@@ -79,10 +79,10 @@ const Quiz = props => {
 
     const checkAnswer = () => {
         if(quiz[atual].resp === resposta && counter === 0) {
-            alert('Parabéns! Você é um gênio')
+            alert('Parabéns! Você acertou!')
             setAcertos(acertos + 1)
         } else if (quiz[atual].resp !== resposta && counter === 0) {
-            alert('Ops..Resposta errada..kkkkk')
+            alert('Ops..Resposta errada..')
             setErros(erros + 1)
         }
     }

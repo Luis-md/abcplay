@@ -29,8 +29,8 @@ const Professor = () => {
             {loading ? <Spinner /> : 
             <div className="welcome-action">
                 <h1>Olá, professor(a) {user && user.username}</h1>
-                <Link to='#'><button className='btn-play'>Publicar quiz</button></Link>
-                <Link to='#'><button className='btn-config'>Meus alunos</button></Link>
+                {/* <Link to='#'><button className='btn-play'>Publicar quiz</button></Link> */}
+                <Link to='/alunos'><button className='btn-config'>Meus alunos</button></Link>
             </div>}
         </div>
     )

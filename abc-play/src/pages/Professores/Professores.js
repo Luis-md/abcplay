@@ -23,7 +23,6 @@ const Professores = () => {
         if(user) {
             setLoading(false)
             if(meusProfessores) {
-                console.log("meus profs ->", meusProfessores)
                 getProfessores()
             }
         } else {

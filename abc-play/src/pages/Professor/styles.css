@@ -31,7 +31,7 @@
 }
 
 .btn-config {
-    background-color: #999;
+    background-color: #067d4d;
     color: #fff;
     height: 40px;
     width: 100%;
@@ -44,4 +44,16 @@
 
 .btn-config:hover {
     filter: brightness(90%)
+}
+
+.btn-zerado {
+    background-color: #ab2727;
+    color: #fff;
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    transition: filter 0.2s;
+    font-size: 18px;
+    border: 0px;
+    margin-top: 20px;
 }

@@ -8,9 +8,9 @@ const BuscarItem = ({ dados }) => {
 
     const authContext = useContext(AuthContext)
 
-    const { addProfessor, user, meusProfessores } = authContext
+    const { addProfessor, delProfessor, user, meusProfessores } = authContext
     
-    const [isAdded, setAdded ] = useState() 
+    const [isAdded, setAdded ] = useState(false) 
 
     const [loading, setLoading] = useState(false)
 
@@ -25,16 +25,27 @@ const BuscarItem = ({ dados }) => {
         }
 
         addProfessor(enviar)
+        setAdded(true)
+    }
+
+    const delProf = () => {
+        setLoading(true)
+        delProfessor({_id: dados.id})
+        setAdded(false)
     }
 
     useEffect(() => {
-        Object.entries(meusProfessores).forEach(prof => {
-            if(prof[0] === dados.id) {
-                setAdded(true)
-            }
-        })
+        setLoading(false)
+        if(meusProfessores) {
+            Object.entries(meusProfessores).forEach(prof => {
+                if(prof[0] === dados.id) {
+                    console.log("caiu")
+                    setAdded(true)
+                }
+            })
+        }
         //eslint-disable-next-line
-    }, [])
+    }, [meusProfessores])
     
     const nome = dados.username.charAt(0).toUpperCase() + dados.username.slice(1)
     return (
@@ -44,7 +55,7 @@ const BuscarItem = ({ dados }) => {
                 <h2 className='prof-content'>{nome}</h2>
                 <h3 className='prof-content'>Contato - {dados.email}</h3>
                 
-                {isAdded ? <button onClick={addProf} className='btn-remove prof-content'>Remover</button> :
+                {isAdded ? <button onClick={delProf} className='btn-remove prof-content'>Remover</button> :
                 <button onClick={addProf} className='btn-add prof-content'>Adicionar</button>}
                 
             </>

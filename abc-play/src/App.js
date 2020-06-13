@@ -12,6 +12,8 @@ import Register from './pages/Register'
 import User from './pages/User'
 import Professor from './pages/Professor/Professor'
 import Professores from './pages/Professores/Professores'
+import Alunos from './pages/MeusAlunos/Alunos'
+import DesempenhoAluno from './pages/DesempenhoAluno/DesempenhoAluno'
 import BuscarProfessor from './pages/BuscarProfessor/BuscarProfessor'
 import Series from './pages/Serie/Series'
 import Assuntos from './pages/Assuntos/Assuntos'
@@ -49,6 +51,8 @@ function App() {
             <PrivateRoute exact path="/desempenho" component={ Desempenho } />
             <PrivateRoute exact path="/professor" component={ Professor } />
             <PrivateRoute exact path="/professores" component={ Professores } />
+            <PrivateRoute exact path="/alunos" component={ Alunos } />
+            <PrivateRoute exact path="/desempenho-aluno" component={ DesempenhoAluno } />
             <PrivateRoute exact path="/buscar-professor" component={ BuscarProfessor } />
           </Switch>
         </Router>

@@ -4,7 +4,7 @@ import './styles.css'
 import Spinner from '../../components/Spinner'
 import { Link } from 'react-router-dom'
 
-const User = () => {
+const User = props => {
    
     const[ loading, setLoading ] = useState(false)    
     const authContext = useContext(AuthContext)
@@ -18,11 +18,14 @@ const User = () => {
 
     useEffect(() => {
         if(user) {
+            if(user.type === "professor") {
+                props.history.push('/professor')
+            }
             setLoading(false)
         } else {
             setLoading(true)
         }        
-    }, [user])
+    }, [user, props])
 
     return (
         <div className="user-screen">

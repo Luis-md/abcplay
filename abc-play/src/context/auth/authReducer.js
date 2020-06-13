@@ -15,7 +15,9 @@ import {
     GET_PROFESSORES,
     FILTER_PROFESSORES,
     ADD_PROFESSOR,
-    CLEAR_FILTER
+    DEL_PROFESSOR,
+    CLEAR_FILTER,
+    GET_ALUNO
 } from '../types'
 
 export default (state, action) => {
@@ -104,6 +106,16 @@ export default (state, action) => {
                 ...state,
                 meusProfessores: action.payload
             }
+        case DEL_PROFESSOR:
+            return {
+                ...state,
+                meusProfessores: action.payload
+            }
+        case GET_ALUNO: 
+        return {
+            ...state,
+            meuAluno: action.payload
+        }
         case CLEAR_FILTER: 
         return {
             ...state,

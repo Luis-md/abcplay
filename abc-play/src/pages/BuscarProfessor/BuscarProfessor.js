@@ -43,9 +43,6 @@ const BuscarProfessor = () => {
                     <BuscarItem key = {res.email} dados = {res} />
                 ))
             }
-                {/* {professores.map(res => (
-                    <BuscarItem key = {res.email} dados = {res} />
-                ))} */}
                 <Link to='/serie'><button className='btn-quiz'>Escolher quiz</button></Link>
             </div>
     ) : (
